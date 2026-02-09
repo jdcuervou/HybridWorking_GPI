@@ -8,9 +8,9 @@ Nature, 630(8018), 920–925.
 https://doi.org/10.1038/s41586-024-07500-2
 
 ## Integrantes del equipo
-- Harold Acuña – Desarollo
-- Natalia Suescun – Investigación
-- Jose D Cuervo – Gestión del repositorio y documentación
+- Harold Acuña – Data Scientist
+- Natalia Cortés - Data Engenier
+- Jose D Cuervo – PMO
 
 ## Descripción del proyecto
 Este proyecto busca reproducir parcialmente los resultados empíricos del artículo de Bloom et al. (2024),
