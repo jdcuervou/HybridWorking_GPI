@@ -1,0 +1,54 @@
+############################
+# Datos
+############################
+
+# Datos sin procesar
+data/raw/*
+!data/raw/README_raw_data.md
+
+# Datos procesados
+data/processed/*
+!data/processed/README_processed_data.md
+
+
+############################
+# Outputs
+############################
+
+# Figuras y tablas reproducibles outputs/*
+!outputs/README_outputs.md
+
+
+############################
+# Python
+############################
+
+# Archivos compilados
+__pycache__/
+*.pyc
+*.pyo
+
+# Entornos virtuales
+.env
+.venv
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+############################
+# Logs y temporales
+############################
+
+*.log
+*.tmp
+
+############################
+# Sistema operativo
+############################
+
+.DS_Store
+Thumbs.db
+
+
