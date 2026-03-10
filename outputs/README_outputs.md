@@ -1,19 +1,16 @@
-## Salidas (DEPRECADA)
+## Outputs (deprecada)
 
-⚠️ **Esta carpeta está deprecada desde la reorganización del proyecto.**
+Esta carpeta ya no se usa para almacenar resultados del pipeline.
 
-### Nueva estructura
+## Ubicacion actual de resultados
+Usar `results/`:
 
-Los resultados del proyecto ahora se almacenan en **`results/`**:
-
-```
+```text
 results/
-├── figures/       # Gráficos y visualizaciones
-└── tables/        # Tablas de resultados
+|-- figures/
+`-- tables/
 ```
 
-### Migración
-
-Todas las salidas futuras deben guardarse en la carpeta `results/` segun su tipo.
-
-Ver [results/README.md](../results/README.md) para más detalles.
+## Nota
+Todo artefacto nuevo de analisis o validacion debe guardarse en `results/`.
+Referencia: `results/README.md`.

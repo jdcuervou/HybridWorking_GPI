@@ -1,94 +1,89 @@
 # HybridWorking_GPI
-# Replicación: Hybrid working from home improves retention without damaging performance
 
-## Paper seleccionado
-Bloom, N., Han, R., & Liang, J. (2024).  
-*Hybrid working from home improves retention without damaging performance*.  
-Nature, 630(8018), 920–925.  
-https://doi.org/10.1038/s41586-024-07500-2
+Replicacion del paper *Hybrid working from home improves retention without damaging performance* (Bloom, Han y Liang, 2024).
 
-## Integrantes del equipo
-- Harold Acuña – Data Scientist
-- Natalia Cortés - Data Engenier
-- Jose D Cuervo – PMO
+## Referencia
+- Articulo: Nature 630(8018), 920-925
+- DOI paper: `10.1038/s41586-024-07500-2`
+- DOI datos (Dataverse): `10.7910/DVN/6X4ZZL`
 
-## Descripción del proyecto
-Este proyecto busca reproducir parcialmente los resultados empíricos del artículo de Bloom et al. (2024),
-que analiza el impacto del trabajo híbrido desde casa sobre la retención laboral y el desempeño de los trabajadores.
+## Objetivo
+Reproducir la Figura 2 del paper y validar la cercania entre los resultados reportados y la replica.
 
-Siguiendo los lineamientos del curso, el equipo reproducirá un resultado específico basado en evidencia
-cuantitativa reportada en el artículo, utilizando los datos y el código provistos por los autores en los
-materiales suplementarios.
-
-## Resultado a reproducir
-Como ejercicio inicial, se planea reproducir el efecto del esquema de trabajo híbrido sobre la tasa de
-retención de los empleados, uno de los principales hallazgos del artículo.
-
-## Estructura del repositorio
-```
+## Estructura
+```text
 HybridWorking_GPI/
-├── data/
-│   ├── raw/              # Datos originales descargados
-│   └── processed/        # Datos procesados para análisis
-├── scripts/              # Scripts numerados del pipeline
-│   ├── 01_download_data_clean.py
-│   └── 02_generate_figure.py
-├── src/                  # Módulos de código reutilizable
-│   ├── __init__.py
-│   └── config.py
-├── results/              # Resultados generados
-│   ├── figures/          # Gráficos y visualizaciones
-│   └── tables/           # Tablas de resultados
-├── docs/                 # Documentación del proyecto
-├── environment.yml       # Dependencias conda
-├── runall.ps1           # Pipeline completo (Windows)
-└── runall.sh            # Pipeline completo (Linux/Mac)
+|-- code/                    # Scripts auxiliares del proyecto
+|-- data/
+|   |-- raw/                 # Datos originales descargados (ej. figure2.csv)
+|   `-- processed/           # Datos transformados/intermedios (si aplica)
+|-- docs/                    # Notas y documentacion de apoyo
+|-- results/
+|   |-- figures/             # Figuras generadas
+|   `-- tables/              # Tablas de resultados
+|-- scripts/                 # Pipeline principal reproducible
+|   |-- 01_download_data_clean.py
+|   |-- 02_generate_figure.py
+|   `-- 03_validate_replication.py
+|-- src/
+|   `-- config.py            # Configuracion central (rutas, DOI, etc.)
+|-- environment.yml
+|-- runall.ps1               # Pipeline completo en Windows
+`-- runall.sh                # Pipeline completo en Linux/Mac
 ```
 
-Cada carpeta contiene un archivo README que describe su contenido.
+## Requisitos
+- Python 3.11+
+- Dependencias en `environment.yml` (Conda) o `code/requirements.txt` (pip)
 
-## Requisitos técnicos
-- **Lenguaje**: Python 3.11+
-- **Gestor de entornos**: Conda
-- **Paquetes principales**: pandas, numpy, statsmodels, scikit-learn, matplotlib, seaborn
+## Instalacion
 
-## Instalación y uso
-
-### 1. Crear entorno conda
+### Opcion A: Conda
 ```bash
 conda env create -f environment.yml
 conda activate hybridworking-gpi
 ```
 
-### 2. Ejecutar pipeline completo
-
-**Windows (PowerShell):**
-```powershell
-.\runall.ps1
-```
-
-Si PowerShell bloquea la ejecucion de scripts en tu sesion:
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-.\runall.ps1
-```
-
-**Linux/Mac:**
+### Opcion B: venv + pip
 ```bash
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# Linux/Mac
+source .venv/bin/activate
+pip install -r code/requirements.txt
+```
+
+## Ejecucion
+
+### Pipeline completo
+```powershell
+# Windows
+.\runall.ps1
+```
+
+```bash
+# Linux/Mac
 chmod +x runall.sh
 ./runall.sh
 ```
 
-### 3. Ejecutar scripts individuales
+### Ejecucion paso a paso
 ```bash
 python scripts/01_download_data_clean.py
 python scripts/02_generate_figure.py
+python scripts/03_validate_replication.py
 ```
 
-## Solucion de problemas
+## Salidas esperadas
+- `data/raw/figure2.csv`
+- `results/figures/figure2_replica.png`
+- `results/tables/figure2_summary.csv`
+- `results/tables/validation_comparison.csv`
+- `results/figures/validation_discrepancies.png`
+- `results/figures/validation_table_journal.png`
 
-Si encuentras problemas al ejecutar el pipeline, consulta [TROUBLESHOOTING.md](TROUBLESHOOTING.md) para diagnóstico detallado y soluciones comunes.
-
-## Estado del proyecto
-Este repositorio corresponde al Avance 1 del Proyecto Transversal del curso
-Gestión de Proyectos de Investigación y Ciencia Abierta.
+## Equipo
+- Harold Acuna - Data Scientist
+- Natalia Cortes - Data Engineer
+- Jose D Cuervo - PMO

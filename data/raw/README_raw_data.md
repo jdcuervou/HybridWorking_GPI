@@ -1,31 +1,31 @@
-## Raw Data
+## Raw data
 
-Esta carpeta contiene los datos originales descargados automáticamente
-desde Harvard Dataverse.
+Carpeta para datos originales descargados desde Harvard Dataverse.
 
-**Fuente**: Bloom, N., Han, R., & Liang, J. (2024)  
-**DOI**: 10.7910/DVN/6X4ZZL  
-**URL**: https://doi.org/10.1038/s41586-024-07500-2
+- Fuente: Bloom, N., Han, R., & Liang, J. (2024)
+- DOI dataset: `10.7910/DVN/6X4ZZL`
 
-### Descarga automática
+## Descarga
 
-Los datos se descargan ejecutando:
 ```bash
 python scripts/01_download_data_clean.py
 ```
 
-El script:
-- Descarga automáticamente el archivo de la **Figura 2** del paper
-- Convierte el formato .tab a CSV legible
-- Guarda como `figure2.csv` en esta carpeta
+Comportamiento por defecto del script:
+- Filtra por `figure2`.
+- Descarga desde Dataverse.
+- Convierte `.tab/.tsv` a `.csv`.
+- Guarda en esta carpeta (`data/raw/`).
 
-Para descargar todos los archivos del dataset:
+Ejemplo para descargar todo el dataset:
+
 ```bash
 python scripts/01_download_data_clean.py --filter ""
 ```
 
-### Política de versionado
+## Archivo clave en esta replica
+- `figure2.csv`: insumo principal para reproducir Figura 2.
 
-Los datos raw **no se versionan** en este repositorio por su tamaño y 
-disponibilidad pública. Cada colaborador debe descargarlos localmente 
-usando el script provisto.
+## Versionado
+Versionar solo archivos necesarios para reproducibilidad del ejercicio.
+Si se descargan archivos grandes adicionales, preferir regenerarlos localmente.

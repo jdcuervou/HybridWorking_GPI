@@ -1,26 +1,17 @@
-## Processed Data
+## Processed data
 
-Esta carpeta almacena los datos procesados y limpios, listos para análisis.
+Esta carpeta se reserva para datasets intermedios o transformados.
 
-Los archivos procesados son generados por los scripts del pipeline y típicamente incluyen:
+## Estado actual
+En la version actual de la replica, el flujo principal consume `data/raw/figure2.csv`
+y genera salidas directamente en `results/`, por lo que esta carpeta puede estar vacia.
 
-- Datos con valores faltantes imputados o removidos
-- Variables transformadas o ingenierizadas
-- Datasets unidos o filtrados según criterios de análisis
-- Archivos en formatos optimizados (parquet, feather, etc.)
+## Uso futuro esperado
+Guardar aqui archivos derivados como:
+- Limpiezas estandarizadas.
+- Variables construidas para analisis extendido.
+- Tablas intermedias reutilizables.
 
-### Generación
-
-En el estado actual del proyecto no hay un script dedicado de procesamiento en `scripts/`.
-Los resultados reproducidos se generan directamente desde datos raw ejecutando:
-```bash
-python scripts/02_generate_figure.py
-```
-
-Si en etapas futuras se agrega un script de procesamiento, este README debe actualizarse.
-
-### Política de versionado
-
-Los archivos procesados pueden versionarse si son livianos (< 10 MB) y 
-facilitan la reproducibilidad. Archivos más grandes deben agregarse al 
-`.gitignore` y regenerarse localmente.
+## Recomendaciones de versionado
+- Versionar solo procesados pequenos y estables que mejoren la reproducibilidad.
+- Evitar versionar archivos grandes o temporales; regenerarlos con scripts.

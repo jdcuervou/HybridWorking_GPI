@@ -1,28 +1,35 @@
 ## Resultados
 
-Esta carpeta contiene todos los resultados generados por el pipeline de análisis.
+Esta carpeta centraliza las salidas generadas por el pipeline reproducible.
 
-### Estructura
+## Estructura
+- `figures/`: figuras finales y graficos de validacion.
+- `tables/`: tablas resumen y comparaciones paper vs replica.
 
-- **figures/**: Gráficos, visualizaciones y figuras para reportes
-- **tables/**: Tablas de resultados, coeficientes, métricas de modelos
+## Archivos esperados
 
-### Generación
+Al ejecutar el flujo completo deberian aparecer, al menos:
 
-Los resultados se generan ejecutando el pipeline completo o scripts específicos:
+- `figures/figure2_replica.png`
+- `figures/validation_discrepancies.png`
+- `figures/validation_table_journal.png`
+- `tables/figure2_summary.csv`
+- `tables/validation_comparison.csv`
+
+## Como generarlos
 
 ```bash
-# Pipeline completo
-./runall.ps1  # Windows
-./runall.sh   # Linux/Mac
-
-# Scripts individuales
+python scripts/01_download_data_clean.py
 python scripts/02_generate_figure.py
+python scripts/03_validate_replication.py
 ```
 
-### Política de versionado
+o con el pipeline completo:
 
-- **Versionar**: Figuras finales para publicación, tablas clave
-- **No versionar**: Archivos intermedios voluminosos, salidas exploratorias extensas
+- Windows: `./runall.ps1`
+- Linux/Mac: `./runall.sh`
 
-Revisar `.gitignore` para detalles sobre qué se incluye en el repositorio.
+## Versionado
+- Versionar resultados finales usados en el reporte.
+- Evitar versionar salidas exploratorias o archivos grandes no esenciales.
+- Revisar `.gitignore` para la politica vigente del repositorio.

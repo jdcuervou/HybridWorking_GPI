@@ -1,52 +1,67 @@
-## Scripts
+## Scripts del pipeline
 
-Esta carpeta contiene los scripts numerados que conforman el pipeline de análisis,
-diseñados para ejecutarse de forma secuencial.
+Esta carpeta contiene el flujo principal de replicacion, diseñado para ejecutarse en orden.
 
-### Scripts disponibles
+## Orden de ejecucion
+1. `01_download_data_clean.py`
+2. `02_generate_figure.py`
+3. `03_validate_replication.py`
 
-- **01_download_data_clean.py**: Descarga automática de datos desde Harvard Dataverse (DOI: 10.7910/DVN/6X4ZZL)
-  - Por defecto, filtra y descarga solo el archivo de la Figura 2
-  - Convierte archivos .tab a formato CSV
-  - Guarda directamente en `data/raw/`
+## Descripcion por script
 
-- **02_generate_figure.py**: Genera la réplica de la Figura 2 del paper
-  - Lee datos desde `data/raw/figure2.csv`
-  - Genera gráficos comparando attrition entre grupos
-  - Guarda figura en `results/figures/figure2_replica.png`
-  - Guarda tabla resumen en `results/tables/figure2_summary.csv`
+### `01_download_data_clean.py`
+Descarga datos desde Dataverse usando DOI.
 
-- **03_validate_replication.py**: Valida la réplica frente a los valores reportados en el paper
-  - Lee `results/tables/figure2_summary.csv`
-  - Calcula discrepancias por panel entre paper y réplica
-  - Guarda tabla en `results/tables/validation_comparison.csv`
-  - Guarda gráfico en `results/figures/validation_discrepancies.png`
+- DOI por defecto: `10.7910/DVN/6X4ZZL`
+- Filtro por defecto: `figure2`
+- Convierte `.tab/.tsv` a `.csv`
+- Salida por defecto: `data/raw/`
 
-### Uso individual
+Parametros utiles:
+- `--doi`: DOI del dataset
+- `--filter`: Patron de nombre para filtrar archivos
+- `--output-dir`: Carpeta de salida
+- `--convert-csv`: bandera para conversion a CSV (habilitada por defecto en el script)
+
+### `02_generate_figure.py`
+Genera la replica de la Figura 2 a partir de `data/raw/figure2.csv`.
+
+Salidas:
+- `results/figures/figure2_replica.png`
+- `results/tables/figure2_summary.csv`
+
+Nota:
+- Si `attrite_perc` viene en escala 0-100, el script lo normaliza a 0-1 antes de validar y calcular resultados.
+
+### `03_validate_replication.py`
+Compara la replica contra los valores del paper.
+
+Salidas:
+- `results/tables/validation_comparison.csv`
+- `results/figures/validation_discrepancies.png`
+- `results/figures/validation_table_journal.png`
+
+## Uso
+
+Desde la raiz del proyecto:
 
 ```bash
-# Desde la raíz del proyecto
 python scripts/01_download_data_clean.py
 python scripts/02_generate_figure.py
 python scripts/03_validate_replication.py
+```
 
-# Con parámetros opcionales para descarga
+Ejemplos para descarga:
+
+```bash
+# Cambiar DOI/filtro/salida
 python scripts/01_download_data_clean.py --doi 10.7910/DVN/6X4ZZL --filter figure2 --output-dir data/raw
 
-# Descargar todos los archivos (sin filtro)
+# Descargar todos los archivos del dataset
 python scripts/01_download_data_clean.py --filter ""
 ```
 
-**Parámetros disponibles:**
-- `--doi`: DOI del dataset (por defecto: 10.7910/DVN/6X4ZZL)
-- `--filter`: Filtrar archivos por nombre (por defecto: "figure2")
-- `--output-dir`: Directorio de salida (por defecto: data/raw/)
-
-### Próximos scripts planeados
-
-- **03_robustness_checks.py**: Análisis de robustez y sensibilidad
-- **04_extended_analysis.py**: Análisis exploratorio extendido
-
-### Ejecución del pipeline completo
-
-Ver scripts `runall.ps1` (Windows) o `runall.sh` (Linux/Mac) en la raíz del proyecto.
+## Pipeline completo
+Para ejecucion automatica de todos los pasos, usar:
+- `runall.ps1` en Windows
+- `runall.sh` en Linux/Mac
