@@ -77,6 +77,10 @@ chmod +x runall.sh
 python scripts/01_download_data.py
 ```
 
+## Troubleshooting
+
+Si encuentras problemas al ejecutar el pipeline, consulta [TROUBLESHOOTING.md](TROUBLESHOOTING.md) para diagnóstico detallado y soluciones comunes.
+
 ## Estado del proyecto
 Este repositorio corresponde al Avance 1 del Proyecto Transversal del curso
 Gestión de Proyectos de Investigación y Ciencia Abierta.

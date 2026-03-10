@@ -120,7 +120,11 @@ def zenodo_download_plan(landing_url: str) -> Iterable[Tuple[str, Path]]:
 def detect_source(landing_url: str) -> str:
     host = urlparse(landing_url).netloc.lower()
     if "zenodo.org" in host:
-        return "zenodo", convert_to_csv: bool = False) -> int:
+        return "zenodo"
+    return "dataverse"
+
+
+def execute_downloads(plan: Iterable[Tuple[str, Path]], output_dir: Path, convert_to_csv: bool = False) -> int:
     count = 0
     for file_url, relative_path in plan:
         # Cambiar extensión a .csv si es necesario
@@ -136,66 +140,80 @@ def detect_source(landing_url: str) -> str:
         else:
             download_stream(file_url, target)
         
-    for file_url, relative_path in plan:
-        target = output_dir / relative_path
-        print(f"Descargando: {relative_path}")
-        download_stream(file_url, target)
         count += 1
     return count
 
 
 def main() -> None:
-    config = ProjectConfig()
-    
-    parser = argparse.ArgumentParser(
-        description="Descarga archivos de un dataset a partir de un DOI (Dataverse o Zenodo)."
-    )
-    parser.add_argument(
-        "--filter",
-        default="figure2",
-        help="Filtrar archivos por nombre (por defecto: figure2)",
-    )
-    parser.add_argument(
-        "--convert-csv",
-        action="store_true",
-        default=True,
-        help="Convertir archivos .tab a CSV (por defecto: True)",
-    )
-    args = parser.parse_args()
+    try:
+        config = ProjectConfig()
+        
+        parser = argparse.ArgumentParser(
+            description="Descarga archivos de un dataset a partir de un DOI (Dataverse o Zenodo)."
+        )
+        parser.add_argument(
+            "--doi",
+            default=config.doi,
+            help=f"DOI del dataset. Por defecto: {config.doi}",
+        )
+        parser.add_argument(
+            "--output-dir",
+            default=str(DATA_RAW_DIR),
+            help="Directorio donde se guardan los datos descargados.",
+        )
+        parser.add_argument(
+            "--filter",
+            default="figure2",
+            help="Filtrar archivos por nombre (por defecto: figure2)",
+        )
+        parser.add_argument(
+            "--convert-csv",
+            action="store_true",
+            default=True,
+            help="Convertir archivos .tab a CSV (por defecto: True)",
+        )
+        args = parser.parse_args()
 
-    doi = safe_doi(args.doi)
-    output_dir = Path(args.output_dir).resolve()
-    ensure_dir(output_dir)
+        doi = safe_doi(args.doi)
+        output_dir = Path(args.output_dir).resolve()
+        ensure_dir(output_dir)
 
-    print(f"Resolviendo DOI: {doi}")
-    print(f"Filtro de archivos: {args.filter}")
-    landing_url = resolve_doi(doi)
-    source = detect_source(landing_url)
-    print(f"Fuente detectada: {source}")
-    print(f"URL de aterrizaje: {landing_url}\n")
+        print(f"Resolviendo DOI: {doi}")
+        print(f"Filtro de archivos: {args.filter}")
+        
+        try:
+            landing_url = resolve_doi(doi)
+        except Exception as e:
+            raise RuntimeError(
+                f"No se pudo resolver el DOI. Verifica tu conexión a internet.\n"
+                f"Error: {str(e)}"
+            )
+        
+        source = detect_source(landing_url)
+        print(f"Fuente detectada: {source}")
+        print(f"URL de aterrizaje: {landing_url}\n")
 
-    if source == "zenodo":
-        plan = zenodo_download_plan(landing_url)
-    else:
-        base_url = f"{urlparse(landing_url).scheme}://{urlparse(landing_url).netloc}"
-        plan = dataverse_download_plan(base_url=base_url, doi=doi, filter_pattern=args.filter)
+        if source == "zenodo":
+            plan = zenodo_download_plan(landing_url)
+        else:
+            base_url = f"{urlparse(landing_url).scheme}://{urlparse(landing_url).netloc}"
+            plan = dataverse_download_plan(base_url=base_url, doi=doi, filter_pattern=args.filter)
 
-    total = execute_downloads(plan, output_dir, convert_to_csv=args.convert_csv)
-    if total == 0:
-        raise RuntimeError("No se encontraron archivos para descargar con el filtro especificado.")
+        total = execute_downloads(plan, output_dir, convert_to_csv=args.convert_csv)
+        if total == 0:
+            raise RuntimeError(
+                f"No se encontraron archivos para descargar con el filtro '{args.filter}'.\n"
+                f"Intenta sin filtro: --filter \"\""
+            )
 
-    print(f"\n✅ e == "zenodo":
-        plan = zenodo_download_plan(landing_url)
-    else:
-        base_url = f"{urlparse(landing_url).scheme}://{urlparse(landing_url).netloc}"
-        plan = dataverse_download_plan(base_url=base_url, doi=doi)
-
-    total = execute_downloads(plan, output_dir)
-    if total == 0:
-        raise RuntimeError("No se encontraron archivos para descargar.")
-
-    print(f"Descarga completada. Archivos descargados: {total}")
-    print(f"Directorio destino: {output_dir}")
+        print(f"\n✅ Descarga completada. Archivos descargados: {total}")
+        print(f"Directorio destino: {output_dir}")
+        
+    except Exception as e:
+        print(f"\n❌ ERROR en descarga: {type(e).__name__}")
+        print(f"Mensaje: {str(e)}")
+        print(f"\nVer TROUBLESHOOTING.md para más ayuda")
+        raise
 
 
 if __name__ == "__main__":

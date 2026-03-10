@@ -10,13 +10,20 @@ diseñados para ejecutarse de forma secuencial.
   - Convierte archivos .tab a formato CSV
   - Guarda directamente en `data/raw/`
 
+- **02_generate_figure.py**: Genera la réplica de la Figura 2 del paper
+  - Lee datos desde `data/raw/figure2.csv`
+  - Genera gráficos comparando attrition entre grupos
+  - Guarda figura en `results/figures/figure2_replica.png`
+  - Guarda tabla resumen en `results/tables/figure2_summary.csv`
+
 ### Uso individual
 
 ```bash
 # Desde la raíz del proyecto
 python scripts/01_download_data.py
+python scripts/02_generate_figure.py
 
-# Con parámetros opcionales
+# Con parámetros opcionales para descarga
 python scripts/01_download_data.py --filter figure2 --convert-csv
 
 # Descargar todos los archivos (sin filtro)
@@ -31,9 +38,8 @@ python scripts/01_download_data.py --filter ""
 
 ### Próximos scripts planeados
 
-- **02_process_data.py**: Limpieza y procesamiento de datos
-- **03_analyze.py**: Análisis estadístico y modelado
-- **04_visualize.py**: Generación de figuras y tablas
+- **03_robustness_checks.py**: Análisis de robustez y sensibilidad
+- **04_extended_analysis.py**: Análisis exploratorio extendido
 
 ### Ejecución del pipeline completo
 

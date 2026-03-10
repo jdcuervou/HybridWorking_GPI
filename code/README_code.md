@@ -14,6 +14,7 @@ El código del proyecto ahora se organiza en:
 Los archivos de esta carpeta han sido migrados:
 
 - `download_data_from_doi.py` → **`scripts/01_download_data.py`**
+- `figure_generation.py` → **`scripts/02_generate_figure.py`**
 - `requirements.txt` → **`environment.yml`** (gestión con conda)
 
 ### Instalación actual

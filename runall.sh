@@ -19,18 +19,21 @@ cd "$(dirname "$0")"
 export PYTHONPATH="$(pwd)"
 
 # 1. Descargar datos desde DOI
-echo "PASO 1/1: Descargando datos desde Harvard Dataverse (DOI: 10.7910/DVN/6X4ZZL)..."
+echo "PASO 1/2: Descargando datos desde Harvard Dataverse (DOI: 10.7910/DVN/6X4ZZL)..."
 echo "----------------------------------------------------------------------"
-python scripts/01_download_data.py
+python scripts/01_download_data_clean.py
+
+# 2. Generar figura 2
+echo ""
+echo "PASO 2/2: Generando réplica de Figura 2..."
+echo "----------------------------------------------------------------------"
+python scripts/02_generate_figure.py
 
 echo ""
 echo "======================================================================"
-echo "Pipeline de descarga completo ✅"
+echo "Pipeline completo ✅"
 echo "Datos guardados en: data/raw/"
+echo "Figura guardada en: results/figures/figure2_replica.png"
+echo "Tabla guardada en: results/tables/figure2_summary.csv"
 echo "======================================================================"
-echo ""
-echo "Próximos pasos sugeridos:"
-echo "  - Revisar los datos descargados en data/raw/"
-echo "  - Crear scripts 02_process_data.py y 03_analyze.py"
-echo "  - Agregar nuevas etapas al pipeline según avance el proyecto"
 echo ""
