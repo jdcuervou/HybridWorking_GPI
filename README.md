@@ -25,17 +25,57 @@ Como ejercicio inicial, se planea reproducir el efecto del esquema de trabajo h�
 retención de los empleados, uno de los principales hallazgos del artículo.
 
 ## Estructura del repositorio
-- `data/`: datos crudos y procesados
-- `code/`: scripts de análisis y replicación
-- `docs/`: documentación y notas metodológicas
-- `outputs/`: resultados generados (tablas y figuras)
+```
+HybridWorking_GPI/
+├── data/
+│   ├── raw/              # Datos originales descargados
+│   └── processed/        # Datos procesados para análisis
+├── scripts/              # Scripts numerados del pipeline
+│   └── 01_download_data.py
+├── src/                  # Módulos de código reutilizable
+│   ├── __init__.py
+│   └── config.py
+├── results/              # Resultados generados
+│   ├── figures/          # Gráficos y visualizaciones
+│   └── tables/           # Tablas de resultados
+├── docs/                 # Documentación del proyecto
+├── environment.yml       # Dependencias conda
+├── runall.ps1           # Pipeline completo (Windows)
+└── runall.sh            # Pipeline completo (Linux/Mac)
+```
 
 Cada carpeta contiene un archivo README que describe su contenido.
 
-## Requisitos técnicos iniciales
-- Lenguaje de programación:  Python
-- Paquetes estadísticos para análisis causal y datos panel
-- Acceso a los datos y scripts originales provistos por los autores
+## Requisitos técnicos
+- **Lenguaje**: Python 3.11+
+- **Gestor de entornos**: Conda
+- **Paquetes principales**: pandas, numpy, statsmodels, scikit-learn, matplotlib, seaborn
+
+## Instalación y uso
+
+### 1. Crear entorno conda
+```bash
+conda env create -f environment.yml
+conda activate hybridworking-gpi
+```
+
+### 2. Ejecutar pipeline completo
+
+**Windows (PowerShell):**
+```powershell
+.\runall.ps1
+```
+
+**Linux/Mac:**
+```bash
+chmod +x runall.sh
+./runall.sh
+```
+
+### 3. Ejecutar scripts individuales
+```bash
+python scripts/01_download_data.py
+```
 
 ## Estado del proyecto
 Este repositorio corresponde al Avance 1 del Proyecto Transversal del curso

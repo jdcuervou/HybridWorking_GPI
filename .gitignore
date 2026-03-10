@@ -4,19 +4,35 @@
 
 # Datos sin procesar
 data/raw/*
+!data/raw/.gitkeep
 !data/raw/README_raw_data.md
 
-# Datos procesados
+# Datos procesados (solo archivos grandes)
 data/processed/*
-!data/processed/README_processed_data.md
+!data/processed/.gitkeep
+!data/processed/README.md
 
 
 ############################
-# Outputs
+# Results
 ############################
 
-# Figuras y tablas reproducibles outputs/*
-!outputs/README_outputs.md
+# Resultados reproducibles (mantener estructura)
+results/figures/*
+results/tables/*
+!results/**/.gitkeep
+!results/README.md
+
+# Carpeta exploratory removida del proyecto
+results/exploratory/
+
+
+############################
+# Code
+############################
+
+# Carpeta code antigua (deprecada)
+code/
 
 
 ############################
@@ -33,6 +49,13 @@ __pycache__/
 .venv
 venv/
 env/
+ENV/
+
+# Configuración de conda
+.conda/
+
+# VS Code
+.vscode/
 
 # Jupyter
 .ipynb_checkpoints/
