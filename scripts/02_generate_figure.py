@@ -44,6 +44,15 @@ def load_data(file_path: Path) -> pd.DataFrame:
         raise FileNotFoundError(f"No se encontró el archivo: {file_path}")
 
     df = pd.read_csv(file_path)
+
+    # Algunos archivos traen attrite_perc en escala 0-100; normalizamos a 0-1.
+    if "attrite_perc" in df.columns:
+        df["attrite_perc"] = pd.to_numeric(df["attrite_perc"], errors="coerce")
+        non_null = df["attrite_perc"].dropna()
+        if not non_null.empty and float(non_null.max()) > 1:
+            print("Advertencia: 'attrite_perc' detectado en escala 0-100. Se convertirá a 0-1.")
+            df["attrite_perc"] = df["attrite_perc"] / 100.0
+
     return df
 
 
@@ -53,14 +62,26 @@ def validate_data(df: pd.DataFrame) -> None:
     if missing:
         raise ValueError(f"Faltan columnas requeridas: {missing}")
 
-    for col in REQUIRED_COLUMNS:
+    # Columnas clave para el cálculo principal: no deben tener nulos.
+    strict_non_null_cols = ["treat", "attrite_perc"]
+    for col in strict_non_null_cols:
         if df[col].isna().any():
             raise ValueError(f"La columna '{col}' contiene valores nulos.")
+
+    # En subgrupos puede haber faltantes; avisamos para transparencia.
+    subgroup_cols = ["role", "male", "live_far"]
+    for col in subgroup_cols:
+        null_count = int(df[col].isna().sum())
+        if null_count > 0:
+            print(
+                f"Advertencia: la columna '{col}' contiene {null_count} nulos. "
+                "Las métricas por subgrupo se calcularán con casos disponibles."
+            )
 
     # Verificación básica de variables binarias
     binary_cols = ["treat", "role", "male", "live_far", "attrite_perc"]
     for col in binary_cols:
-        unique_vals = set(df[col].unique())
+        unique_vals = set(df[col].dropna().unique())
         if not unique_vals.issubset({0, 1}):
             raise ValueError(
                 f"La columna '{col}' debe ser binaria (0/1). Valores encontrados: {sorted(unique_vals)}"
