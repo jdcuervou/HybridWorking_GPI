@@ -1,4 +1,4 @@
-## Results
+## Resultados
 
 Esta carpeta contiene todos los resultados generados por el pipeline de análisis.
 
@@ -17,8 +17,7 @@ Los resultados se generan ejecutando el pipeline completo o scripts específicos
 ./runall.sh   # Linux/Mac
 
 # Scripts individuales
-python scripts/03_analyze.py
-python scripts/04_visualize.py
+python scripts/02_generate_figure.py
 ```
 
 ### Política de versionado

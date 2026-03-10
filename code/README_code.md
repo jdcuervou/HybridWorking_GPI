@@ -1,4 +1,4 @@
-## Code (DEPRECADA)
+## Codigo (DEPRECADA)
 
 ⚠️ **Esta carpeta está deprecada desde la reorganización del proyecto.**
 
@@ -6,14 +6,14 @@
 
 El código del proyecto ahora se organiza en:
 
-- **`scripts/`**: Scripts numerados del pipeline (ej: `01_download_data.py`)
+- **`scripts/`**: Scripts numerados del pipeline (ej: `01_download_data_clean.py`)
 - **`src/`**: Módulos de código reutilizable (ej: `config.py`, `utilidades.py`)
 
 ### Migración
 
 Los archivos de esta carpeta han sido migrados:
 
-- `download_data_from_doi.py` → **`scripts/01_download_data.py`**
+- `download_data_from_doi.py` → **`scripts/01_download_data_clean.py`**
 - `figure_generation.py` → **`scripts/02_generate_figure.py`**
 - `requirements.txt` → **`environment.yml`** (gestión con conda)
 

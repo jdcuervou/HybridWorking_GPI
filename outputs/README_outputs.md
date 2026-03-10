@@ -1,4 +1,4 @@
-## Outputs (DEPRECADA)
+## Salidas (DEPRECADA)
 
 ⚠️ **Esta carpeta está deprecada desde la reorganización del proyecto.**
 
@@ -14,6 +14,6 @@ results/
 
 ### Migración
 
-Todos los outputs futuros deben guardarse en la carpeta `results/` según su tipo.
+Todas las salidas futuras deben guardarse en la carpeta `results/` segun su tipo.
 
 Ver [results/README.md](../results/README.md) para más detalles.

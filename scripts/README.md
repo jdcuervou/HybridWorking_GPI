@@ -5,7 +5,7 @@ diseñados para ejecutarse de forma secuencial.
 
 ### Scripts disponibles
 
-- **01_download_data.py**: Descarga automática de datos desde Harvard Dataverse (DOI: 10.7910/DVN/6X4ZZL)
+- **01_download_data_clean.py**: Descarga automática de datos desde Harvard Dataverse (DOI: 10.7910/DVN/6X4ZZL)
   - Por defecto, filtra y descarga solo el archivo de la Figura 2
   - Convierte archivos .tab a formato CSV
   - Guarda directamente en `data/raw/`
@@ -20,20 +20,19 @@ diseñados para ejecutarse de forma secuencial.
 
 ```bash
 # Desde la raíz del proyecto
-python scripts/01_download_data.py
+python scripts/01_download_data_clean.py
 python scripts/02_generate_figure.py
 
 # Con parámetros opcionales para descarga
-python scripts/01_download_data.py --filter figure2 --convert-csv
+python scripts/01_download_data_clean.py --doi 10.7910/DVN/6X4ZZL --filter figure2 --output-dir data/raw
 
 # Descargar todos los archivos (sin filtro)
-python scripts/01_download_data.py --filter ""
+python scripts/01_download_data_clean.py --filter ""
 ```
 
 **Parámetros disponibles:**
 - `--doi`: DOI del dataset (por defecto: 10.7910/DVN/6X4ZZL)
 - `--filter`: Filtrar archivos por nombre (por defecto: "figure2")
-- `--convert-csv`: Convertir .tab a CSV (por defecto: True)
 - `--output-dir`: Directorio de salida (por defecto: data/raw/)
 
 ### Próximos scripts planeados

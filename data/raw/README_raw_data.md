@@ -11,7 +11,7 @@ desde Harvard Dataverse.
 
 Los datos se descargan ejecutando:
 ```bash
-python scripts/01_download_data.py
+python scripts/01_download_data_clean.py
 ```
 
 El script:
@@ -21,7 +21,7 @@ El script:
 
 Para descargar todos los archivos del dataset:
 ```bash
-python scripts/01_download_data.py --filter ""
+python scripts/01_download_data_clean.py --filter ""
 ```
 
 ### Política de versionado

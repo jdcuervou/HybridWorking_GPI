@@ -31,7 +31,8 @@ HybridWorking_GPI/
 │   ├── raw/              # Datos originales descargados
 │   └── processed/        # Datos procesados para análisis
 ├── scripts/              # Scripts numerados del pipeline
-│   └── 01_download_data.py
+│   ├── 01_download_data_clean.py
+│   └── 02_generate_figure.py
 ├── src/                  # Módulos de código reutilizable
 │   ├── __init__.py
 │   └── config.py
@@ -66,6 +67,12 @@ conda activate hybridworking-gpi
 .\runall.ps1
 ```
 
+Si PowerShell bloquea la ejecucion de scripts en tu sesion:
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.\runall.ps1
+```
+
 **Linux/Mac:**
 ```bash
 chmod +x runall.sh
@@ -74,10 +81,11 @@ chmod +x runall.sh
 
 ### 3. Ejecutar scripts individuales
 ```bash
-python scripts/01_download_data.py
+python scripts/01_download_data_clean.py
+python scripts/02_generate_figure.py
 ```
 
-## Troubleshooting
+## Solucion de problemas
 
 Si encuentras problemas al ejecutar el pipeline, consulta [TROUBLESHOOTING.md](TROUBLESHOOTING.md) para diagnóstico detallado y soluciones comunes.
 

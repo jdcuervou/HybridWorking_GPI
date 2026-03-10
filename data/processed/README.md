@@ -11,10 +11,13 @@ Los archivos procesados son generados por los scripts del pipeline y típicament
 
 ### Generación
 
-Los datos procesados se generan ejecutando:
+En el estado actual del proyecto no hay un script dedicado de procesamiento en `scripts/`.
+Los resultados reproducidos se generan directamente desde datos raw ejecutando:
 ```bash
-python scripts/02_process_data.py
+python scripts/02_generate_figure.py
 ```
+
+Si en etapas futuras se agrega un script de procesamiento, este README debe actualizarse.
 
 ### Política de versionado
 
