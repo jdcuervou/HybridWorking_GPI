@@ -16,12 +16,19 @@ diseñados para ejecutarse de forma secuencial.
   - Guarda figura en `results/figures/figure2_replica.png`
   - Guarda tabla resumen en `results/tables/figure2_summary.csv`
 
+- **03_validate_replication.py**: Valida la réplica frente a los valores reportados en el paper
+  - Lee `results/tables/figure2_summary.csv`
+  - Calcula discrepancias por panel entre paper y réplica
+  - Guarda tabla en `results/tables/validation_comparison.csv`
+  - Guarda gráfico en `results/figures/validation_discrepancies.png`
+
 ### Uso individual
 
 ```bash
 # Desde la raíz del proyecto
 python scripts/01_download_data_clean.py
 python scripts/02_generate_figure.py
+python scripts/03_validate_replication.py
 
 # Con parámetros opcionales para descarga
 python scripts/01_download_data_clean.py --doi 10.7910/DVN/6X4ZZL --filter figure2 --output-dir data/raw
