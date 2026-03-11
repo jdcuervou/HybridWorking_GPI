@@ -91,6 +91,6 @@ python scripts/03_validate_replication.py
 ## Documentación y entregables
 Contiene documentos en word de entrega 1 y entrega 2 para garantizar trazabilidad y documentación asociada a la entrega
 ```bash
-python docs/Proyecto_Transversal.docs
-python docs/Parte 3 Avance GPI.docs
+`docs/Proyecto_Transversal.docs`
+`docs/Parte 3 Avance GPI.docs`
 ```
