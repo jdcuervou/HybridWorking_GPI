@@ -1,3 +1,4 @@
+# Código de carga y limpieza de datos
 from __future__ import annotations
 
 import argparse
