@@ -88,7 +88,7 @@ python scripts/03_validate_replication.py
 - Natalia Cortes - Data Engineer
 - Jose D Cuervo - PMO
 
-### Documentación
+## Documentación y entregables
 Contiene documentos en word de entrega 1 y entrega 2 para garantizar trazabilidad y documentación asociada a la entrega
 ```bash
 python docs/Proyecto_Transversal.docs
