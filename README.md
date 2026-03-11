@@ -76,7 +76,7 @@ python scripts/03_validate_replication.py
 ```
 
 ## Salidas esperadas
-- `data/raw/figure2.csv`
+- `c`
 - `results/figures/figure2_replica.png`
 - `results/tables/figure2_summary.csv`
 - `results/tables/validation_comparison.csv`
@@ -87,3 +87,10 @@ python scripts/03_validate_replication.py
 - Harold Acuna - Data Scientist
 - Natalia Cortes - Data Engineer
 - Jose D Cuervo - PMO
+
+### Documentación
+Contiene documentos en word de entrega 1 y entrega 2 para garantizar trazabilidad y documentación asociada a la entrega
+```bash
+python docs/Proyecto_Transversal.docs
+python docs/Parte 3 Avance GPI.docs
+```
